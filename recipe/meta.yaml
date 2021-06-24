@@ -18,7 +18,6 @@ requirements:
     - python
     - pip
     - wheel
-    - setuptools_scm
     - pytest-runner
   run:
     - python
