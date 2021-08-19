@@ -1,4 +1,4 @@
-{% set version = "2.6.6" %}
+{% set version = "2.7.1" %}
 
 package:
   name: astroid
@@ -6,7 +6,7 @@ package:
 
 source:
   url: https://pypi.io/packages/source/a/astroid/astroid-{{ version }}.tar.gz
-  sha256: 3975a0bd5373bdce166e60c851cfcbaf21ee96de80ec518c1f4cb3e94c3fb334
+  sha256: f3083366b7bb8b3a72c0e12841ab07f14b0d7ff5cc1c89676b84d8f5832e4b61
 
 build:
   number: 0
@@ -39,8 +39,7 @@ test:
 
 about:
   home: https://www.astroid.org/
-  # Upstream include the LGPL 2.1 license and has no mention of "or later" in the source
-  license: LGPL-2.1-only
+  license: LGPL-2.1-or-later
   license_family: LGPL
   license_file: LICENSE
   summary: A abstract syntax tree for Python with inference support.
