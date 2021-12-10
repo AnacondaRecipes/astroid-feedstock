@@ -1,4 +1,4 @@
-{% set version = "2.7.1" %}
+{% set version = "2.9.0" %}
 
 package:
   name: astroid
@@ -6,7 +6,7 @@ package:
 
 source:
   url: https://pypi.io/packages/source/a/astroid/astroid-{{ version }}.tar.gz
-  sha256: f3083366b7bb8b3a72c0e12841ab07f14b0d7ff5cc1c89676b84d8f5832e4b61
+  sha256: 5939cf55de24b92bda00345d4d0659d01b3c7dafb5055165c330bc7c568ba273
 
 build:
   number: 0
@@ -17,16 +17,16 @@ requirements:
   host:
     - python
     - pip
+    - pytest-runner
     - setuptools >=20.0
     - wheel
-    - pytest-runner
   run:
     - python
     - setuptools >=20.0
     - lazy-object-proxy >=1.4.0
-    - wrapt >=1.11,<1.13
-    - typed-ast >=1.4.0,<1.5  # [py<38]
-    - typing-extensions >=3.7.4 # [py<38]
+    - wrapt >=1.11,<1.14
+    - typed-ast >=1.4.0,<2.0  # [py<38]
+    - typing-extensions >=3.10 # [py<310]
 
 test:
   requires:
