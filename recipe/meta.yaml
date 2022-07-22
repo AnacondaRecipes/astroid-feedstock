@@ -1,4 +1,4 @@
-{% set version = "2.9.0" %}
+{% set version = "2.12.1" %}
 
 package:
   name: astroid
@@ -6,12 +6,11 @@ package:
 
 source:
   url: https://pypi.io/packages/source/a/astroid/astroid-{{ version }}.tar.gz
-  sha256: 5939cf55de24b92bda00345d4d0659d01b3c7dafb5055165c330bc7c568ba273
+  sha256: 6780c1e5581abe2af53417b51120faac23f332e0868e88a3a4f5e895d75ec5f9
 
 build:
   number: 0
-  # trigger: 1
-  skip: true  # [py<36]
+  skip: true  # [py<37]
   script: {{ PYTHON }} -m pip install . --no-deps -vv
 
 requirements:
@@ -20,12 +19,12 @@ requirements:
     - pip
     - pytest-runner
     - setuptools >=20.0
-    - wheel
+    - wheel !=0.37.1
   run:
     - python
-    - setuptools >=20.0
+    - setuptools !=62.6
     - lazy-object-proxy >=1.4.0
-    - wrapt >=1.11,<1.14
+    - wrapt >=1.11,<2
     - typed-ast >=1.4.0,<2.0  # [py<38]
     - typing-extensions >=3.10 # [py<310]
 
@@ -47,7 +46,7 @@ about:
   description: |
     Astroid provide a common base representation of python source code for
     projects such as pychecker, pyreverse, pylint.
-  doc_url: http://astroid.readthedocs.io/en/latest/?badge=latest
+  doc_url: https://pylint.pycqa.org/projects/astroid/en/latest/?badge=latest
   doc_source_url: https://github.com/PyCQA/astroid/blob/master/doc/index.rst
   dev_url: https://github.com/PyCQA/astroid
 
