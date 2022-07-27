@@ -18,27 +18,31 @@ requirements:
     - python
     - pip
     - pytest-runner
-    - setuptools >=20.0
-    - wheel !=0.37.1
+    - setuptools
+    - wheel
   run:
     - python
-    - setuptools !=62.6
     - lazy-object-proxy >=1.4.0
     - wrapt >=1.11,<2
     - typed-ast >=1.4.0,<2.0  # [py<38]
     - typing-extensions >=3.10 # [py<310]
+  run_constrained:
+    - python >=3.7.2
 
 test:
   requires:
     - pip
   imports:
     - astroid
+    - astroid.brain
+    - astroid.interpreter
+    - astroid.nodes
     - astroid.modutils
   commands:
     - python -m pip check
 
 about:
-  home: https://www.astroid.org/
+  home: https://github.com/PyCQA/astroid
   license: LGPL-2.1-or-later
   license_family: LGPL
   license_file: LICENSE
