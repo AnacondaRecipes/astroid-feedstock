@@ -19,7 +19,7 @@ requirements:
     - setuptools
     - wheel
   run:
-    - python >=3.7.2
+    - python
     - lazy-object-proxy >=1.4.0
     - wrapt >=1.14,<2  # [py>=311]
     - wrapt >=1.11,<2  # [py<311]
