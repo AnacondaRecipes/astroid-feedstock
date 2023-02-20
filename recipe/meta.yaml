@@ -1,4 +1,4 @@
-{% set version = "2.13.3" %}
+{% set version = "2.14.2" %}
 
 package:
   name: astroid
@@ -6,8 +6,7 @@ package:
 
 source:
   url: https://pypi.io/packages/source/a/astroid/astroid-{{ version }}.tar.gz
-  sha256: 6afc22718a48a689ca24a97981ad377ba7fb78c133f40335dfd16772f29bcfb1
-
+  sha256: a3cf9f02c53dd259144a7e8f3ccd75d67c9a8c716ef183e0c1f291bc5d7bb3cf
 build:
   number: 0
   skip: true  # [py<37]
@@ -22,8 +21,8 @@ requirements:
   run:
     - python
     - lazy-object-proxy >=1.4.0
-    - wrapt >=1.11,<2  # [py<311]
     - wrapt >=1.14,<2  # [py>=311]
+    - wrapt >=1.11,<2  # [py<311]
     - typed-ast >=1.4.0,<2.0  # [py<38]
     - typing-extensions >=4.0.0 # [py<311]
 
