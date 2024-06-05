@@ -1,16 +1,18 @@
-{% set version = "2.14.2" %}
+{% set name = "astroid" %}
+{% set version = "3.2.2" %}
 
 package:
-  name: astroid
+  name: {{ name|lower }}
   version: {{ version }}
 
 source:
-  url: https://pypi.io/packages/source/a/astroid/astroid-{{ version }}.tar.gz
-  sha256: a3cf9f02c53dd259144a7e8f3ccd75d67c9a8c716ef183e0c1f291bc5d7bb3cf
+  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/astroid-{{ version }}.tar.gz
+  sha256: 8ead48e31b92b2e217b6c9733a21afafe479d52d6e164dd25fb1a770c7c3cf94
+
 build:
   number: 0
-  skip: true  # [py<37]
-  script: {{ PYTHON }} -m pip install . --no-deps -vv
+  skip: true  # [py<38]
+  script: {{ PYTHON }} -m pip install . --no-deps --no-build-isolation -vv
 
 requirements:
   host:
@@ -20,11 +22,7 @@ requirements:
     - wheel
   run:
     - python
-    - lazy-object-proxy >=1.4.0
-    - wrapt >=1.14,<2  # [py>=311]
-    - wrapt >=1.11,<2  # [py<311]
-    - typed-ast >=1.4.0,<2.0  # [py<38]
-    - typing-extensions >=4.0.0 # [py<311]
+    - typing-extensions >=4.0.0  # [py<311]
 
 test:
   requires:
