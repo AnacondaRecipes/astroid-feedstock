@@ -1,5 +1,5 @@
 {% set name = "astroid" %}
-{% set version = "3.2.2" %}
+{% set version = "3.2.4" %}
 
 package:
   name: {{ name|lower }}
@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/astroid-{{ version }}.tar.gz
-  sha256: 8ead48e31b92b2e217b6c9733a21afafe479d52d6e164dd25fb1a770c7c3cf94
+  sha256: 0e14202810b30da1b735827f78f5157be2bbd4a7a59b7707ca0bfc2fb4c0063a
 
 build:
   number: 0
@@ -27,14 +27,19 @@ requirements:
 test:
   requires:
     - pip
+    - pytest
   imports:
     - astroid
     - astroid.brain
     - astroid.interpreter
     - astroid.nodes
     - astroid.modutils
+  source_files:
+    - tests
   commands:
-    - python -m pip check
+    - pip check
+    # Skip tests that require manipulating file system and recursion limits in unsafe ways.
+    - pytest -v tests -k "not (test_data_build_error_filename or test_recursion_error_trapped)"
 
 about:
   home: https://github.com/PyCQA/astroid
@@ -49,6 +54,8 @@ about:
   dev_url: https://github.com/PyCQA/astroid
 
 extra:
+  skip-lints:
+    - invalid_url
   recipe-maintainers:
     - ericdill
     - jakirkham
