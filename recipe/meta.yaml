@@ -54,6 +54,7 @@ test:
     - mypy
   commands:
     - pip check
+    - python -c "from importlib.metadata import version; assert(version('{{ name }}')=='{{ version }}')"
     # Skip tests that require manipulating file system and recursion limits in unsafe ways.
     - pytest -v tests -k "not (test_data_build_error_filename or test_recursion_error_trapped)"
 
