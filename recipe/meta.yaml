@@ -11,7 +11,7 @@ source:
 
 build:
   number: 0
-  skip: true  # [py<390]
+  skip: true  # [py<39]
   script: {{ PYTHON }} -m pip install . --no-deps --no-build-isolation -vv
 
 requirements:
@@ -21,21 +21,37 @@ requirements:
     - setuptools >=77
   run:
     - python
-    - typing-extensions >=4.0.0  # [py<311]
-    - typing_extensions >=4  # [py<311]
+    - typing-extensions >=4  # [py<311]
 
 test:
+  source_files:
+    - tests
+  imports:
+    - astroid
+    - astroid.arguments
+    - astroid.astroid_manager
+    - astroid.bases
+    - astroid.brain
+    - astroid.builder
+    - astroid.const
+    - astroid.context
+    - astroid.decorators
+    - astroid.exceptions
+    - astroid.filter_statements
+    - astroid.inference_tip
+    - astroid.interpreter
+    - astroid.manager
+    - astroid.modutils
+    - astroid.nodes
+    - astroid.objects
+    - astroid.raw_building
+    - astroid.transforms
+    - astroid.typing
+    - astroid.util
   requires:
     - pip
     - pytest
-  imports:
-    - astroid
-    - astroid.brain
-    - astroid.interpreter
-    - astroid.nodes
-    - astroid.modutils
-  source_files:
-    - tests
+    - mypy
   commands:
     - pip check
     # Skip tests that require manipulating file system and recursion limits in unsafe ways.
