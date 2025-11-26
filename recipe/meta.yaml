@@ -76,7 +76,7 @@ test:
     - mypy
 
 about:
-  home: https://github.com/PyCQA/astroid
+  home: https://github.com/pylint-dev/astroid
   license: LGPL-2.1-or-later
   license_family: LGPL
   license_file: LICENSE
@@ -85,7 +85,7 @@ about:
     Astroid provide a common base representation of python source code for
     projects such as pychecker, pyreverse, pylint.
   doc_url: https://pylint.pycqa.org/projects/astroid
-  dev_url: https://github.com/PyCQA/astroid
+  dev_url: https://github.com/pylint-dev/astroid
 
 extra:
   skip-lints:
