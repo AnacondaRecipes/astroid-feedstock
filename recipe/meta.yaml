@@ -29,6 +29,10 @@ requirements:
 # >   self.assertEqual(result, ["real"])
 # E   AssertionError: None != ['real']
 {% set deselect_tests = deselect_tests + " --deselect=tests/test_get_relative_base_path.py::TestModUtilsRelativePath::test_symlink_resolution" %}
+#>  __import__("pkg_resources").declare_namespace(__name__)
+#   ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+#E  ModuleNotFoundError: No module named 'pkg_resources'
+{% set deselect_tests = deselect_tests + " --deselect=tests/test_manager.py::AstroidManagerTest::test_identify_old_namespace_package_protocol" %}  # [py==314]
 # Test execution never ends in this file:
 {% set ignore_tests = " --ignore=tests/test_nodes.py" %}
 test:
