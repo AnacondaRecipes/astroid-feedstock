@@ -33,6 +33,12 @@ requirements:
 #   ^^^^^^^^^^^^^^^^^^^^^^^^^^^
 #E  ModuleNotFoundError: No module named 'pkg_resources'
 {% set deselect_tests = deselect_tests + " --deselect=tests/test_manager.py::AstroidManagerTest::test_identify_old_namespace_package_protocol" %}  # [py==314]
+# Problems with syspath on win:
+# E       FileNotFoundError: [WinError 3] The system cannot find the path specified: 'C:\\Users\\TASK_1~2\\AppData\\Local\\Temp\\secret.py'
+{% set deselect_tests = deselect_tests + " --deselect=tests/test_manager.py::AstroidManagerTest::test_ast_from_module_name_pyz" %}  # [win]
+{% set deselect_tests = deselect_tests + " --deselect=tests/test_modutils.py::ModPathFromFileTest::test_import_symlink_both_outside_of_path" %}  # [win]
+{% set deselect_tests = deselect_tests + " --deselect=tests/test_modutils.py::ModPathFromFileTest::test_import_symlink_with_source_outside_of_path" %}  # [win]
+{% set deselect_tests = deselect_tests + " --deselect=tests/test_modutils.py::ModPathFromFileTest::test_load_from_module_symlink_on_symlinked_paths_in_syspath" %}  # [win]
 # Test execution never ends in this file:
 {% set ignore_tests = " --ignore=tests/test_nodes.py" %}
 test:
