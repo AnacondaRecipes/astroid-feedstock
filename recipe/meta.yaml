@@ -1,5 +1,5 @@
 {% set name = "astroid" %}
-{% set version = "4.0.2" %}
+{% set version = "4.0.3" %}
 
 package:
   name: {{ name }}
@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
-  sha256: ac8fb7ca1c08eb9afec91ccc23edbd8ac73bb22cbdd7da1d488d9fb8d6579070
+  sha256: 08d1de40d251cc3dc4a7a12726721d475ac189e4e583d596ece7422bc176bda3
 
 build:
   number: 0
@@ -84,12 +84,10 @@ about:
   description: |
     Astroid provide a common base representation of python source code for
     projects such as pychecker, pyreverse, pylint.
-  doc_url: https://pylint.pycqa.org/projects/astroid
+  doc_url: https://pylint.readthedocs.io
   dev_url: https://github.com/pylint-dev/astroid
 
 extra:
-  skip-lints:
-    - invalid_url
   recipe-maintainers:
     - ericdill
     - jakirkham
