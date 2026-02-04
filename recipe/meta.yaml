@@ -88,8 +88,6 @@ about:
   dev_url: https://github.com/pylint-dev/astroid
 
 extra:
-  skip-lints:
-    - invalid_url
   recipe-maintainers:
     - ericdill
     - jakirkham
