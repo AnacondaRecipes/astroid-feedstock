@@ -1,13 +1,31 @@
 {% set name = "astroid" %}
-{% set version = "4.0.3" %}
+{% set version = "4.1.2" %}
+{% set deselect_tests = " --deselect=tests/test_builder.py::BuilderTest::test_data_build_error_filename" %}
+{% set deselect_tests = 'deselect_tests + " --deselect=tests/test_get_relative_base_path.py::TestModUtilsRelativePath::test_symlink_resolution"' %}
+{% set deselect_tests = 'deselect_tests + " --deselect=tests/test_manager.py::AstroidManagerTest::test_identify_old_namespace_package_protocol"' %}  # [py==314]
+{% set deselect_tests = 'deselect_tests + " --deselect=tests/test_manager.py::AstroidManagerTest::test_ast_from_module_name_pyz"' %}  # [win]
+{% set deselect_tests = 'deselect_tests + " --deselect=tests/test_modutils.py::ModPathFromFileTest::test_import_symlink_both_outside_of_path"' %}  # [win]
+{% set deselect_tests = 'deselect_tests + " --deselect=tests/test_modutils.py::ModPathFromFileTest::test_import_symlink_with_source_outside_of_path"' %}  # [win]
+{% set deselect_tests = 'deselect_tests + " --deselect=tests/test_modutils.py::ModPathFromFileTest::test_load_from_module_symlink_on_symlinked_paths_in_syspath"' %}  # [win]
+{% set ignore_tests = " --ignore=tests/test_nodes.py" %}
 
+# >   with pytest.raises(AstroidSyntaxError, match="invalid escape sequence") as ctx:
+# E   Failed: DID NOT RAISE <class 'astroid.exceptions.AstroidSyntaxError'>
+# >   self.assertEqual(result, ["real"])
+# E   AssertionError: None != ['real']
+#>  __import__("pkg_resources").declare_namespace(__name__)
+#   ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+#E  ModuleNotFoundError: No module named 'pkg_resources'
+# Problems with syspath on win:
+# E       FileNotFoundError: [WinError 3] The system cannot find the path specified: 'C:\\Users\\TASK_1~2\\AppData\\Local\\Temp\\secret.py'
+# Test execution never ends in this file:
 package:
   name: {{ name }}
   version: {{ version }}
 
 source:
   url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
-  sha256: 08d1de40d251cc3dc4a7a12726721d475ac189e4e583d596ece7422bc176bda3
+  sha256: d6c4a52bfcda4bbeb7359dead642b0248b90f7d9a07e690230bd86fefd6d37f1
 
 build:
   number: 0
@@ -23,24 +41,6 @@ requirements:
     - python
     - typing-extensions >=4  # [py<311]
 
-# >   with pytest.raises(AstroidSyntaxError, match="invalid escape sequence") as ctx:
-# E   Failed: DID NOT RAISE <class 'astroid.exceptions.AstroidSyntaxError'>
-{% set deselect_tests = " --deselect=tests/test_builder.py::BuilderTest::test_data_build_error_filename" %}
-# >   self.assertEqual(result, ["real"])
-# E   AssertionError: None != ['real']
-{% set deselect_tests = deselect_tests + " --deselect=tests/test_get_relative_base_path.py::TestModUtilsRelativePath::test_symlink_resolution" %}
-#>  __import__("pkg_resources").declare_namespace(__name__)
-#   ^^^^^^^^^^^^^^^^^^^^^^^^^^^
-#E  ModuleNotFoundError: No module named 'pkg_resources'
-{% set deselect_tests = deselect_tests + " --deselect=tests/test_manager.py::AstroidManagerTest::test_identify_old_namespace_package_protocol" %}  # [py==314]
-# Problems with syspath on win:
-# E       FileNotFoundError: [WinError 3] The system cannot find the path specified: 'C:\\Users\\TASK_1~2\\AppData\\Local\\Temp\\secret.py'
-{% set deselect_tests = deselect_tests + " --deselect=tests/test_manager.py::AstroidManagerTest::test_ast_from_module_name_pyz" %}  # [win]
-{% set deselect_tests = deselect_tests + " --deselect=tests/test_modutils.py::ModPathFromFileTest::test_import_symlink_both_outside_of_path" %}  # [win]
-{% set deselect_tests = deselect_tests + " --deselect=tests/test_modutils.py::ModPathFromFileTest::test_import_symlink_with_source_outside_of_path" %}  # [win]
-{% set deselect_tests = deselect_tests + " --deselect=tests/test_modutils.py::ModPathFromFileTest::test_load_from_module_symlink_on_symlinked_paths_in_syspath" %}  # [win]
-# Test execution never ends in this file:
-{% set ignore_tests = " --ignore=tests/test_nodes.py" %}
 test:
   source_files:
     - tests
