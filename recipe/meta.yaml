@@ -1,5 +1,5 @@
 {% set name = "astroid" %}
-{% set version = "4.0.3" %}
+{% set version = "4.1.2" %}
 
 package:
   name: {{ name }}
@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
-  sha256: 08d1de40d251cc3dc4a7a12726721d475ac189e4e583d596ece7422bc176bda3
+  sha256: d6c4a52bfcda4bbeb7359dead642b0248b90f7d9a07e690230bd86fefd6d37f1
 
 build:
   number: 0
@@ -32,7 +32,7 @@ requirements:
 #>  __import__("pkg_resources").declare_namespace(__name__)
 #   ^^^^^^^^^^^^^^^^^^^^^^^^^^^
 #E  ModuleNotFoundError: No module named 'pkg_resources'
-{% set deselect_tests = deselect_tests + " --deselect=tests/test_manager.py::AstroidManagerTest::test_identify_old_namespace_package_protocol" %}  # [py==314]
+{% set deselect_tests = deselect_tests + " --deselect=tests/test_manager.py::AstroidManagerTest::test_identify_old_namespace_package_protocol" %}
 # Problems with syspath on win:
 # E       FileNotFoundError: [WinError 3] The system cannot find the path specified: 'C:\\Users\\TASK_1~2\\AppData\\Local\\Temp\\secret.py'
 {% set deselect_tests = deselect_tests + " --deselect=tests/test_manager.py::AstroidManagerTest::test_ast_from_module_name_pyz" %}  # [win]
@@ -69,7 +69,7 @@ test:
   commands:
     - pip check
     - python -c "from importlib.metadata import version; assert(version('{{ name }}')=='{{ version }}')"
-    - pytest -v tests {{ ignore_tests }} {{ deselect_tests }}
+    - pytest -ra -v tests {{ ignore_tests }} {{ deselect_tests }}
   requires:
     - pip
     - pytest
