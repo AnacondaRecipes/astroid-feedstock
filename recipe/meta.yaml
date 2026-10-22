@@ -10,7 +10,7 @@ source:
   sha256: 08d1de40d251cc3dc4a7a12726721d475ac189e4e583d596ece7422bc176bda3
 
 build:
-  number: 0
+  number: 1
   script: {{ PYTHON }} -m pip install . --no-deps --no-build-isolation -vv
   skip: true  # [py<310]
 
@@ -29,10 +29,7 @@ requirements:
 # >   self.assertEqual(result, ["real"])
 # E   AssertionError: None != ['real']
 {% set deselect_tests = deselect_tests + " --deselect=tests/test_get_relative_base_path.py::TestModUtilsRelativePath::test_symlink_resolution" %}
-#>  __import__("pkg_resources").declare_namespace(__name__)
-#   ^^^^^^^^^^^^^^^^^^^^^^^^^^^
-#E  ModuleNotFoundError: No module named 'pkg_resources'
-{% set deselect_tests = deselect_tests + " --deselect=tests/test_manager.py::AstroidManagerTest::test_identify_old_namespace_package_protocol" %}  # [py==314]
+
 # Problems with syspath on win:
 # E       FileNotFoundError: [WinError 3] The system cannot find the path specified: 'C:\\Users\\TASK_1~2\\AppData\\Local\\Temp\\secret.py'
 {% set deselect_tests = deselect_tests + " --deselect=tests/test_manager.py::AstroidManagerTest::test_ast_from_module_name_pyz" %}  # [win]
@@ -74,6 +71,8 @@ test:
     - pip
     - pytest
     - mypy
+    # Legacy namespace package tests require pkg_resources, removed in setuptools 82.
+    - setuptools <82
 
 about:
   home: https://github.com/pylint-dev/astroid
