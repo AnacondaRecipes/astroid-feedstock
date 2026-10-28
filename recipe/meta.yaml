@@ -1,5 +1,5 @@
 {% set name = "astroid" %}
-{% set version = "4.3.0" %}
+{% set version = "4.3.4" %}
 
 package:
   name: {{ name }}
@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
-  sha256: 2b5b5048d6edc40e748e2728790e444b81c3d358e19cc89db6e973236192362f
+  sha256: d515a105722b72098bbe82d430d65e635f742b6cbac3bdfaf8b7c188b87c5e39
 
 build:
   number: 0
